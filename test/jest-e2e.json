@@ -1,0 +1,19 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "@conversa/common/(.*)": "<rootDir>/../libs/common/src/$1",
+    "@conversa/common": "<rootDir>/../libs/common/src",
+    "conversa/database/(.*)": "<rootDir>/../libs/database/src/$1",
+    "conversa/database": "<rootDir>/../libs/database/src"
+  }
+}
