@@ -159,6 +159,20 @@ describe('AppController (e2e)', () => {
       });
     });
 
+    describe('GET /auth', () => {
+      const getUserRequest = () => spec().get('/auth');
+
+      it('should throw an error if access token not provided as authorization bearer', () => {
+        return getUserRequest().expectStatus(401);
+      });
+
+      it('should return 204 no-content', () => {
+        return getUserRequest()
+          .withBearerToken('$S{access-token}')
+          .expectStatus(204);
+      });
+    });
+
     describe('GET /auth/user', () => {
       const getUserRequest = () => spec().get('/auth/user');
 

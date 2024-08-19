@@ -27,6 +27,10 @@ import { Tokens } from './types';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Get('/')
+  public authCheck(): void {}
+
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('user')
   public getAuthenticatedUser(@AuthenticatedUser() user: UserDto): UserDto {
