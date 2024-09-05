@@ -1,16 +1,16 @@
 export enum MessageType {
-  text,
-  image,
-  audio,
-  video,
-  document,
-  location,
-  contact,
+  TEXT = 'TEXT',
+  IMAGE = 'IMAGE',
+  AUDIO = 'AUDIO',
+  VIDEO = 'VIDEO',
+  DOCUMENT = 'DOCUMENT',
+  LOCATION = 'LOCATION',
+  CONTACT = 'CONTACT',
 }
 
 export enum MessageStatus {
-  sent,
-  delivered,
-  seen,
-  played,
+  SENT = 'SENT',
+  DELIVERED = 'DELIVERED',
+  SEEN = 'SEEN',
+  PLAYED = 'PLAYED',
 }

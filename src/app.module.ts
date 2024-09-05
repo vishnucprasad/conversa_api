@@ -5,6 +5,7 @@ import * as Joi from 'joi';
 import { DatabaseModule } from '@conversa/database';
 import { APP_GUARD } from '@nestjs/core';
 import { AccessTokenGuard } from '@conversa/common';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AccessTokenGuard } from '@conversa/common';
     }),
     DatabaseModule,
     AuthModule,
+    ChatModule,
   ],
   providers: [
     {

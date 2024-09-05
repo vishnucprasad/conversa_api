@@ -1,11 +1,11 @@
 import { BaseEntity } from '@conversa/database';
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ChatType } from '../types/chat.types';
 import { Types } from 'mongoose';
 
 @Schema({ versionKey: false, timestamps: true, collection: 'chats' })
 export class Chat extends BaseEntity {
-  @Prop({ requried: true })
+  @Prop({ type: String, enum: ChatType, requried: true })
   type: ChatType;
 
   @Prop({ required: true, minlength: 2 })
@@ -26,3 +26,5 @@ export class Chat extends BaseEntity {
   @Prop()
   lastMessage?: Types.ObjectId;
 }
+
+export const ChatSchema = SchemaFactory.createForClass(Chat);

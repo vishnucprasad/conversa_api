@@ -1,6 +1,6 @@
 import { BaseEntity } from '@conversa/database';
-import { Prop, Schema } from '@nestjs/mongoose';
-import { Types } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { SchemaTypes, Types } from 'mongoose';
 import { MessageStatus, MessageType } from '../types';
 
 @Schema({ versionKey: false, timestamps: true, collection: 'messages' })
@@ -11,16 +11,16 @@ export class Message extends BaseEntity {
   @Prop({ required: true })
   senderId: Types.ObjectId;
 
-  @Prop({ required: true })
+  @Prop({ type: String, enum: MessageType, required: true })
   type: MessageType;
 
-  @Prop({ required: true })
+  @Prop({ type: SchemaTypes.Mixed, required: true })
   content: any;
 
   @Prop({ required: true })
   timestamp: Date;
 
-  @Prop({ default: MessageStatus.sent })
+  @Prop({ type: String, enum: MessageStatus, default: MessageStatus.SENT })
   status?: MessageStatus;
 
   @Prop()
@@ -29,3 +29,4 @@ export class Message extends BaseEntity {
   @Prop({ default: false })
   forwarded?: boolean;
 }
+export const MessageSchema = SchemaFactory.createForClass(Message);
