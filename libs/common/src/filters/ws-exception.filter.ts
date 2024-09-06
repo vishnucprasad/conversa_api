@@ -5,10 +5,17 @@ import {
   HttpException,
   BadRequestException,
   ConflictException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { WsException } from '@nestjs/websockets';
 
-@Catch(WsException, HttpException, BadRequestException, ConflictException)
+@Catch(
+  WsException,
+  HttpException,
+  BadRequestException,
+  ConflictException,
+  UnauthorizedException,
+)
 export class WsExceptionFilter implements ExceptionFilter {
   catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToWs();
@@ -27,6 +34,12 @@ export class WsExceptionFilter implements ExceptionFilter {
       const response = exception.getResponse();
       if (typeof response === 'object' && response['message']) {
         code = 'CONFLICT_EXCEPTION';
+        errorMessage = response['message']; // Extract validation errors
+      }
+    } else if (exception instanceof UnauthorizedException) {
+      const response = exception.getResponse();
+      if (typeof response === 'object' && response['message']) {
+        code = 'UNAUTHORIZED_EXCEPTION';
         errorMessage = response['message']; // Extract validation errors
       }
     } else if (

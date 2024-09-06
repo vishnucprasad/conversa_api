@@ -10,11 +10,18 @@ import {
 } from '@nestjs/websockets';
 import { ChatService } from './chat.service';
 import { Server, Socket } from 'socket.io';
-import { Logger, UseFilters, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Logger,
+  UseFilters,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { NewChatDto } from './dtos';
-import { WsExceptionFilter } from '@conversa/common';
+import { WsExceptionFilter, WsGuard } from '@conversa/common';
 
 @WebSocketGateway()
+@UseGuards(WsGuard)
 @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 @UseFilters(new WsExceptionFilter())
 export class ChatGateway
