@@ -6,6 +6,7 @@ import {
   Connection,
   FilterQuery,
   Model,
+  MongooseUpdateQueryOptions,
   PipelineStage,
   QueryOptions,
   SaveOptions,
@@ -54,6 +55,14 @@ export abstract class BaseEntityRepository<TEntity extends BaseEntity> {
     }
 
     return document;
+  }
+
+  public async updateMany(
+    filterQuery: FilterQuery<TEntity>,
+    update: UpdateQuery<TEntity>,
+    options?: MongooseUpdateQueryOptions<TEntity> & { session?: ClientSession },
+  ) {
+    return await this.model.updateMany(filterQuery, update, options);
   }
 
   public async upsert(

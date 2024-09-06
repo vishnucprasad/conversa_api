@@ -19,5 +19,6 @@ import { JwtModule } from '@nestjs/jwt';
     AccessTokenStrategy,
     RefreshTokenStrategy,
   ],
+  exports: [MongooseModule, UserRepository],
 })
 export class AuthModule {}

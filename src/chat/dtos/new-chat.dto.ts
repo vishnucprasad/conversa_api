@@ -56,5 +56,14 @@ export class NewChatDto {
 
   @IsArray()
   @IsOptional()
+  @Validate(IsObjectIdConstraint, {
+    each: true,
+    message: 'each value in admins must be a mongodb id',
+  })
+  @Transform(({ value }) =>
+    value.map(
+      (id: string) => Types.ObjectId.isValid(id) && new Types.ObjectId(id),
+    ),
+  )
   admins?: Array<Types.ObjectId>;
 }
